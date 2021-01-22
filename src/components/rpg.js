@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const Hero = {
@@ -20,20 +20,21 @@ const Rpg = () => {
   const [character, setCharacter] = useState(Hero);
   const [enemy, setEnemy] = useState(antiHero);
 
-  const checkHealth = (player) => {
-    if (player.health <= 0) {
-      alert(`${player.name} lost`);
+  useEffect(() => {
+    if (character.health <= 0) {
+      alert(`${character.name} lost`);
     }
-  };
+    if (enemy.health <= 0) {
+      alert(`${enemy.name} lost`);
+    }
+  });
 
   const characterReceiveDamage = async () => {
     setCharacter({ ...character, health: character.health - enemy.attack });
-    await checkHealth(character);
   };
 
   const enemyReceiveDamage = () => {
     setEnemy({ ...enemy, health: enemy.health - character.attack });
-    checkHealth(enemy);
   };
 
   return (
