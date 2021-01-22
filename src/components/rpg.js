@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const Hero = {
   name: "hero",
+  level: 1,
   health: 100,
   exp: 0,
   type: "water",
@@ -11,6 +12,7 @@ const Hero = {
 
 const antiHero = {
   name: "anti-hero",
+  level: 1,
   health: 100,
   exp: 0,
   type: "water",
@@ -41,12 +43,12 @@ const Rpg = () => {
     <>
       <div>Rpg</div>
       <Box>
-        <div className="hero">
+        <div className="hero player">
           <div>Character: {character.name}</div>
           <div>Health: {character.health}</div>
           <button onClick={enemyReceiveDamage}>Damage</button>
         </div>
-        <div className="enemy">
+        <div className="enemy player">
           <div>Enemy: {enemy.name}</div>
           <div>Health: {enemy.health}</div>
           <button onClick={characterReceiveDamage}>Damage</button>
@@ -63,4 +65,7 @@ const Box = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  .player {
+    margin: 20px;
+  }
 `;
