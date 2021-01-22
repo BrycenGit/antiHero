@@ -21,6 +21,7 @@ const antiHero = {
 const Rpg = () => {
   const [character, setCharacter] = useState(Hero);
   const [enemy, setEnemy] = useState(antiHero);
+  const [expThreshold, setExpThreshold] = useState(100);
 
   useEffect(() => {
     if (character.health <= 0) {
@@ -30,6 +31,7 @@ const Rpg = () => {
       alert(`${enemy.name} lost`);
       addExp();
     }
+    checkExp();
     console.log(character);
   });
 
@@ -46,12 +48,30 @@ const Rpg = () => {
     setEnemy(antiHero);
   };
 
+  const checkExp = () => {
+    if (character.exp >= expThreshold) {
+      levelUp();
+    }
+  };
+
+  const levelUp = () => {
+    setCharacter({
+      ...character,
+      exp: character.exp - expThreshold,
+      level: character.level + 1,
+    });
+    setExpThreshold(Math.round(expThreshold * 1.2));
+    console.log(Math.round(expThreshold * 1.2));
+  };
+
   return (
     <>
       <div>Rpg</div>
       <Box>
         <div className="hero player">
           <div>Character: {character.name}</div>
+          <div>Level: {character.level}</div>
+          <div>Exp: {character.exp}</div>
           <div>Health: {character.health}</div>
           <button onClick={enemyReceiveDamage}>Damage</button>
         </div>
