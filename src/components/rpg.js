@@ -28,15 +28,22 @@ const Rpg = () => {
     }
     if (enemy.health <= 0) {
       alert(`${enemy.name} lost`);
+      addExp();
     }
+    console.log(character);
   });
 
-  const characterReceiveDamage = async () => {
+  const characterReceiveDamage = () => {
     setCharacter({ ...character, health: character.health - enemy.attack });
   };
 
   const enemyReceiveDamage = () => {
     setEnemy({ ...enemy, health: enemy.health - character.attack });
+  };
+
+  const addExp = () => {
+    setCharacter({ ...character, exp: character.exp + 55 });
+    setEnemy(antiHero);
   };
 
   return (
