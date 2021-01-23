@@ -6,6 +6,8 @@ const saberSon = {
   attack: 10,
 };
 
+const weaponInventory = [saberSon, saberSon, saberSon, saberSon];
+
 const Hero = {
   name: "hero",
   level: 1,
@@ -30,6 +32,7 @@ const Rpg = () => {
   const [character, setCharacter] = useState(Hero);
   const [enemy, setEnemy] = useState(antiHero);
   const [expThreshold, setExpThreshold] = useState(100);
+  const [selectedWeapon, setSelectedWeapon] = useState(null);
 
   useEffect(() => {
     if (character.health <= 0) {
@@ -41,11 +44,21 @@ const Rpg = () => {
     }
     checkExp();
     console.log(character);
+    console.log(selectedWeapon);
   });
 
-  const equipWeapon = (weaponParam) => {
-    setCharacter({ ...character, weapon: { ...weaponParam } });
-    alert(`${weaponParam.name} equipped`);
+  const handleSelectingWeapon = (e) => {
+    const index = parseInt(e.target.value);
+    setSelectedWeapon(weaponInventory[index]);
+  };
+
+  const equipWeapon = () => {
+    if (selectedWeapon) {
+      setCharacter({ ...character, weapon: { ...selectedWeapon } });
+      alert(`${selectedWeapon.name} equipped`);
+    } else {
+      alert("no weapon selected");
+    }
   };
 
   const unEquipWeapon = () => {
@@ -93,20 +106,39 @@ const Rpg = () => {
     <>
       <div>Rpg</div>
       <Box>
+        <div onChange={handleSelectingWeapon} className="weapons player">
+          {weaponInventory &&
+            weaponInventory.map((weapon, index) => {
+              return (
+                <>
+                  {" "}
+                  <div>
+                    <input type="radio" value={index} /> {weapon.name}
+                  </div>
+                </>
+              );
+            })}
+        </div>
         <div className="hero player">
           <div>Character: {character.name}</div>
           <div>Level: {character.level}</div>
           <div>Exp: {character.exp}</div>
           <div>Health: {character.health}</div>
-          <button onClick={enemyReceiveDamage}>Damage</button>
-          <button
-            onClick={() => {
-              equipWeapon(saberSon);
-            }}
-          >
-            Equip Weapon
-          </button>
-          <button onClick={unEquipWeapon}>Unequip Weapon</button>
+          <div>
+            <button onClick={enemyReceiveDamage}>Damage</button>
+          </div>
+          <div>
+            <button
+              onClick={() => {
+                equipWeapon(saberSon);
+              }}
+            >
+              Equip Weapon
+            </button>
+          </div>
+          <div>
+            <button onClick={unEquipWeapon}>Unequip Weapon</button>
+          </div>
         </div>
         <div className="enemy player">
           <div>Enemy: {enemy.name}</div>
