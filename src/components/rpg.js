@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 
-const longSword = {
+const saberSon = {
   name: "saber-son",
   attack: 10,
 };
@@ -43,12 +43,29 @@ const Rpg = () => {
     console.log(character);
   });
 
+  const equipWeapon = (weaponParam) => {
+    setCharacter({ ...character, weapon: { ...weaponParam } });
+    alert(`${weaponParam.name} equipped`);
+  };
+
+  const unEquipWeapon = () => {
+    setCharacter({ ...character, weapon: null });
+    alert("weapon unequiped");
+  };
+
   const characterReceiveDamage = () => {
     setCharacter({ ...character, health: character.health - enemy.attack });
   };
 
   const enemyReceiveDamage = () => {
-    setEnemy({ ...enemy, health: enemy.health - character.attack });
+    setEnemy({
+      ...enemy,
+      health:
+        enemy.health -
+        (character.weapon
+          ? character.weapon.attack + character.attack
+          : character.attack),
+    });
   };
 
   const addExp = () => {
@@ -82,6 +99,14 @@ const Rpg = () => {
           <div>Exp: {character.exp}</div>
           <div>Health: {character.health}</div>
           <button onClick={enemyReceiveDamage}>Damage</button>
+          <button
+            onClick={() => {
+              equipWeapon(saberSon);
+            }}
+          >
+            Equip Weapon
+          </button>
+          <button onClick={unEquipWeapon}>Unequip Weapon</button>
         </div>
         <div className="enemy player">
           <div>Enemy: {enemy.name}</div>
