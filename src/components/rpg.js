@@ -141,6 +141,7 @@ const Rpg = () => {
         </div>
         <div className="hero player">
           <div>Character: {character.name}</div>
+          <div>Exp until next Level: {expThreshold - character.exp}</div>
           <div>Level: {character.level}</div>
           <div>Exp: {character.exp}</div>
           <div>Health: {character.health}</div>
