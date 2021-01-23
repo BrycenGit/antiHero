@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 
+const longSword = {
+  name: "saber-son",
+  attack: 10,
+};
+
 const Hero = {
   name: "hero",
   level: 1,
@@ -8,6 +13,8 @@ const Hero = {
   exp: 0,
   type: "water",
   attack: 20,
+  weapon: null,
+  armor: null,
 };
 
 const antiHero = {
@@ -18,6 +25,7 @@ const antiHero = {
   type: "water",
   attack: 20,
 };
+
 const Rpg = () => {
   const [character, setCharacter] = useState(Hero);
   const [enemy, setEnemy] = useState(antiHero);
@@ -86,6 +94,7 @@ const Rpg = () => {
 };
 
 export default Rpg;
+
 const Box = styled.div`
   margin: 80px;
   display: flex;
