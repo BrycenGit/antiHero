@@ -83,13 +83,22 @@ const Rpg = () => {
   };
 
   const enemyReceiveDamage = () => {
+    const random = Math.floor(Math.random() * 11);
+    const luck = 5;
+    let critical = 1;
+    if (luck >= random) {
+      critical = 1.5;
+      alert("critical");
+    }
+    console.log(random);
     setEnemy({
       ...enemy,
       health:
         enemy.health -
         (character.weapon
           ? character.weapon.attack + character.attack
-          : character.attack),
+          : character.attack) *
+          critical,
     });
   };
 
