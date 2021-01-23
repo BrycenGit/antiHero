@@ -5,8 +5,20 @@ const saberSon = {
   name: "saber-son",
   attack: 10,
 };
+const pettyBlade = {
+  name: "petty-blade",
+  attack: 2,
+};
+const prettySavage = {
+  name: "pretty-savage",
+  attack: 15,
+};
+const bamf = {
+  name: "bamf",
+  attack: 30,
+};
 
-const weaponInventory = [saberSon, saberSon, saberSon, saberSon];
+const weaponInventory = [pettyBlade, saberSon, prettySavage, bamf];
 
 const Hero = {
   name: "hero",
@@ -107,23 +119,32 @@ const Rpg = () => {
       <div>Rpg</div>
       <Box>
         <div onChange={handleSelectingWeapon} className="weapons player">
-          {weaponInventory &&
-            weaponInventory.map((weapon, index) => {
-              return (
-                <>
-                  {" "}
+          <div>Weapons Inventory</div>
+          <select>
+            <option value="">None</option>
+            {weaponInventory &&
+              weaponInventory.map((weapon, index) => {
+                return (
+                  <>
+                    {/* {" "}
                   <div>
-                    <input type="radio" value={index} /> {weapon.name}
-                  </div>
-                </>
-              );
-            })}
+                    <input type="radio" value={index} /> {weapon.name} - atk:{" "}
+                    {weapon.attack}
+                  </div> */}
+                    <option value={index}>
+                      {weapon.name} - atk: {weapon.attack}
+                    </option>
+                  </>
+                );
+              })}
+          </select>
         </div>
         <div className="hero player">
           <div>Character: {character.name}</div>
           <div>Level: {character.level}</div>
           <div>Exp: {character.exp}</div>
           <div>Health: {character.health}</div>
+          <div>Weapon: {character.weapon ? character.weapon.name : "None"}</div>
           <div>
             <button onClick={enemyReceiveDamage}>Damage</button>
           </div>
