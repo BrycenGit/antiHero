@@ -135,11 +135,6 @@ const Rpg = () => {
               weaponInventory.map((weapon, index) => {
                 return (
                   <>
-                    {/* {" "}
-                  <div>
-                    <input type="radio" value={index} /> {weapon.name} - atk:{" "}
-                    {weapon.attack}
-                  </div> */}
                     <option value={index}>
                       {weapon.name} - atk: {weapon.attack}
                     </option>
